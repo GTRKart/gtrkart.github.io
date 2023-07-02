@@ -2,6 +2,8 @@ import { css, styled } from "styled-components";
 import POSTER from '../media/kart-dark-poster.jpg';
 import POSTER_MOBILE from '../media/kart-dark-poster-mobile.jpg';
 
+const TITLE_FONT = "'Righteous', cursive";
+
 type AppFormProps = {
   $isFormOpen: boolean;
 };
@@ -55,8 +57,15 @@ export const AppIntro = styled.section`
   padding: 32px;
 
   @media (min-width: 768px) {
-    maw-width: 50%;
+    max-width: 50%;
   }
+`;
+
+export const AppIntroTitle = styled.h2`
+  margin: 0;
+  font-family: ${TITLE_FONT};
+  font-size: 32px;
+  letter-spacing: 2px;
 `;
 
 export const AppForm = styled.form<AppFormProps>`
@@ -65,8 +74,7 @@ export const AppForm = styled.form<AppFormProps>`
   padding: 32px;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
-
-  color: #5e2c05;
+  color: #40180A;
 
   position: fixed;
   top: 0;
@@ -84,13 +92,27 @@ export const AppForm = styled.form<AppFormProps>`
   }
 `;
 
-const TICKET_COLOR = '#fff5c8';
+export const AppFormTitle = styled.h3`
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-family: ${TITLE_FONT};
+  font-size: 24px;
+  letter-spacing: 2px;
+`;
+
+export const AppEventInfo = styled.section`
+  min-width: 12em;
+`;
+
+const TICKET_BG_COLOR = '#fff5c8';
+const TICKET_COLOR = 'inherit';
 const getRandomPosX = () => Math.floor(Math.random() * 100);
 
 const ticketStyles = css`
-  background-color: ${TICKET_COLOR};
+  background-color: ${TICKET_BG_COLOR};
   padding: 16px;
   position: relative;
+  color: ${TICKET_COLOR};
 
   &:before, &:after {
     content:'';
@@ -99,8 +121,8 @@ const ticketStyles = css`
     position:absolute;
     bottom:100%;
     left:0;
-    background-image: linear-gradient(135deg, transparent 66%, ${TICKET_COLOR} 67%),
-                      linear-gradient(45deg, ${TICKET_COLOR} 33%, gray 34%, transparent 44%);
+    background-image: linear-gradient(135deg, transparent 66%, ${TICKET_BG_COLOR} 67%),
+                      linear-gradient(45deg, ${TICKET_BG_COLOR} 33%, gray 34%, transparent 44%);
     background-position: ${getRandomPosX()}% 0;
     background-size: 10px 100%;
     background-repeat:repeat-x;
@@ -109,13 +131,14 @@ const ticketStyles = css`
   &:after {
     top:100%;
     bottom:auto;
-    background-image: linear-gradient(135deg, ${TICKET_COLOR} 33%, gray 34%, transparent 44%),
-                      linear-gradient(45deg, transparent 66%, ${TICKET_COLOR} 67%);    
+    background-image: linear-gradient(135deg, ${TICKET_BG_COLOR} 33%, gray 34%, transparent 44%),
+                      linear-gradient(45deg, transparent 66%, ${TICKET_BG_COLOR} 67%);    
   }
 `;
 
 export const AppPaymentInfo = styled.section`
   ${ticketStyles}
+  font-size: 12px;
 `;
 
 export const SubscriptionSection = styled.section`

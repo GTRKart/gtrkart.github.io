@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import FormField from '../components/FormField/FormField';
 import Icon from '../components/Icon';
 import { Button, FlexItem, Row } from '../components/style-components';
-import { AppBackground, AppForm, AppHeader, AppIntro, AppPaymentInfo, SubscriptionSection } from './App.styles';
-import FormField from '../components/FormField/FormField';
+import { AppBackground, AppEventInfo, AppForm, AppFormTitle, AppHeader, AppIntro, AppPaymentInfo, AppIntroTitle, SubscriptionSection } from './App.styles';
 
 type User = {
   name: string;
@@ -32,15 +32,17 @@ function App() {
     <div>
       <AppBackground $isFormOpen={isFormOpen}>
         <AppHeader>
-          <p>
+          <h1>
             GTR Racing
-          </p>
+          </h1>
         </AppHeader>
 
         <AppIntro>
           <p>Próxima corrida</p>
-          <h1>GTR RACING - 7ª ETAPA</h1>
-          <time dateTime="2023-07-01T16:00:00.000Z">1 de Julho de 2023 às 16:00</time>
+          <AppIntroTitle>GTR Racing - 7ª etapa</AppIntroTitle>
+          <p>
+            <time dateTime="2023-07-01T16:00:00.000Z">1 de Julho de 2023 às 16:00</time>
+          </p>
           <p>Kartódromo de Itú</p>
           <p>
             <Button onClick={openForm}>Inscreva-se <Icon name="arrow-right" /></Button>
@@ -60,19 +62,17 @@ function App() {
 
         <hr />
 
-        <p>
-          <strong>GTR Racing - 7ª etapa</strong>
-        </p>
+        <AppFormTitle>GTR Racing - 7ª etapa</AppFormTitle>
 
         <Row $gap="32px" $alignItems="flex-start">
-          <section>
+          <AppEventInfo>
             <p>
               <Icon name="date" />
               <time dateTime="2023-07-01T16:00:00.000Z"> 1 de Julho de 2023</time>
             </p>
             <p><Icon name="time" /> 16:00</p>
             <p><Icon name="location" /> Kartódromo de Itú</p>
-          </section>
+          </AppEventInfo>
 
           <AppPaymentInfo>
             <p><strong>Pagamento:</strong></p>

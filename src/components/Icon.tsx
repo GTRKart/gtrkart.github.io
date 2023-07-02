@@ -50,7 +50,7 @@ type IconProps = {
   fill?: string;
 };
 
-const SVGIconContainer = styled.div<Pick<IconProps, 'size'>>`
+const SVGIconContainer = styled.span<Pick<IconProps, 'size'>>`
   display: inline-block;
   vertical-align: baseline;
   width: ${({ size }) => size};

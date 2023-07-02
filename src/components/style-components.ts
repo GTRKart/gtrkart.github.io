@@ -1,6 +1,6 @@
 import { css, styled } from "styled-components";
 
-export const Row = styled.div<{ $gap?: string; $alignItems?: string }>`
+export const Row = styled.span<{ $gap?: string; $alignItems?: string }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -8,7 +8,7 @@ export const Row = styled.div<{ $gap?: string; $alignItems?: string }>`
   gap: ${({ $gap: gap }) => gap || '16px'};
 `;
 
-export const Column = styled.div<{ gap?: string; alignItems?: string }>`
+export const Column = styled.span<{ gap?: string; alignItems?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,7 +16,7 @@ export const Column = styled.div<{ gap?: string; alignItems?: string }>`
   gap: ${({ gap }) => gap || '16px'};
 `;
 
-export const FlexItem = styled.div<{ flex?: string }>`
+export const FlexItem = styled.span<{ flex?: string }>`
   flex: ${({ flex }) => flex || '1'};
 `;
 
