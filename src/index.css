@@ -7,7 +7,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table th,
+table td {
+  padding: 8px;
+  text-align: left;
+}
+
+table tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+hr {
+  width: 100%;
+  margin: 16px 0;
+  border: 0 none;
+  border-top: 1px solid #eee;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+[disabled], :disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
