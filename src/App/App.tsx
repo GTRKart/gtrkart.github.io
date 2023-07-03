@@ -1,120 +1,15 @@
-import { useState } from 'react';
-import FormField from '../components/FormField/FormField';
-import Icon from '../components/Icon';
-import { Button, FlexItem, Row } from '../components/style-components';
-import { AppBackground, AppEventInfo, AppForm, AppFormTitle, AppHeader, AppIntro, AppPaymentInfo, AppIntroTitle, SubscriptionSection } from './App.styles';
-
-type User = {
-  name: string;
-  email: string;
-  cpf: string;
-};
-
-const mockUser = {
-  name: 'John Doe',
-  email: 'john@doe.doe',
-  cpf: '97898798798',
-};
+import SubscriptionForm from '../SubscriptionForm/SubscriptionForm';
+import { AppMainContainer } from './App.styles';
+import AppCover from './AppCover/AppCover';
+import AppHeader from './AppHeader/AppHeader';
 
 function App() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [user, setUser] = useState<User>();
-
-  const openForm = () => {
-    setIsFormOpen(true);
-  };
-
-  const closeForm = () => {
-    setIsFormOpen(false);
-  };
-
   return (
-    <div>
-      <AppBackground $isFormOpen={isFormOpen}>
-        <AppHeader>
-          <h1>
-            GTR Racing
-          </h1>
-        </AppHeader>
-
-        <AppIntro>
-          <p>Próxima corrida</p>
-          <AppIntroTitle>GTR Racing - 7ª etapa</AppIntroTitle>
-          <p>
-            <time dateTime="2023-07-01T16:00:00.000Z">1 de Julho de 2023 às 16:00</time>
-          </p>
-          <p>Kartódromo de Itú</p>
-          <p>
-            <Button onClick={openForm}>Inscreva-se <Icon name="arrow-right" /></Button>
-          </p>
-        </AppIntro>
-      </AppBackground>
-
-      <AppForm $isFormOpen={isFormOpen}>
-        <Row>
-          <Button type="button" $unstyled onClick={closeForm}>
-            <Icon name="arrow-left" /> Voltar
-          </Button>
-          <FlexItem>
-            <p>Próxima corrida</p>
-          </FlexItem>
-        </Row>
-
-        <hr />
-
-        <AppFormTitle>GTR Racing - 7ª etapa</AppFormTitle>
-
-        <Row $gap="32px" $alignItems="flex-start">
-          <AppEventInfo>
-            <p>
-              <Icon name="date" />
-              <time dateTime="2023-07-01T16:00:00.000Z"> 1 de Julho de 2023</time>
-            </p>
-            <p><Icon name="time" /> 16:00</p>
-            <p><Icon name="location" /> Kartódromo de Itú</p>
-          </AppEventInfo>
-
-          <AppPaymentInfo>
-            <p><strong>Pagamento:</strong></p>
-            <p>R$ 140,00 por piloto</p>
-            <p>A vista. PIX: 229.427.918-29 (Rodrigo)</p>
-            <p><strong>Pagar até 23 de Junho de 2023 às 12:00</strong></p>
-          </AppPaymentInfo>
-        </Row>
-
-        <section>
-          <p><strong>Nº de pilotos:</strong> de 15 a 35</p>
-          <p><strong>Vagas disponíveis:</strong> 12</p>
-          <p><strong>Lastro:</strong> 100Kg (a pesagem será feita na hora)</p>
-        </section>
-
-        <SubscriptionSection>
-          <p>
-            <strong>Inscrição</strong>
-          </p>
-          {user ? (
-            <>
-              <FormField label="Nome" type="text" name="name" value={user.name} onChange={console.log} />
-              <FormField label="E-mail" type="email" name="email" value={user.email} disabled />
-              <FormField label="CPF" type="text" name="cpf" value={user.cpf} onChange={console.log} />
-              <Row>
-                <Button $unstyled type="button" onClick={() => setUser(undefined)}><Icon name="arrow-left" /> Sair</Button>
-                <Button type="button" onClick={console.log}>Confirmar inscrição <Icon name="arrow-right" /></Button>
-              </Row>
-            </>
-          ) : (
-            <>
-              <p>Faça login ou cadastre-se para fazer a sua inscrição.</p>
-              <FormField label="E-mail" type="email" name="email" value="" onChange={console.log} />
-              <FormField label="Senha" type="password" name="password" value="" onChange={console.log} />
-              <p>
-                <Button type="button" onClick={() => setUser(mockUser)}>Entrar</Button>
-              </p>
-            </>
-          )}
-        </SubscriptionSection>
-      </AppForm>
-    </div>
+    <AppMainContainer>
+      <AppHeader />
+      <AppCover />
+      <SubscriptionForm />
+    </AppMainContainer>
   );
 }
 
