@@ -12,7 +12,7 @@ export const FormFieldWrapper = styled.div`
 
 export const Label = styled.label`
   flex: 1;
-  font-size: 0.875rem;
+  font: inherit;
   text-transform: uppercase;
 `;
 

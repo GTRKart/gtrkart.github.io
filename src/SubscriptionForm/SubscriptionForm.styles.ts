@@ -11,6 +11,8 @@ export const SubscriptionContainer = styled.form<SubscriptionContainerProps>`
   padding: 32px;
   transform: translateX(100%);
   transition: all 0.5s ease-in-out;
+
+  font-size: 12px;
   color: #40180A;
 
   position: fixed;
@@ -38,6 +40,13 @@ export const SubscriptionTitle = styled.h3`
   letter-spacing: 2px;
 `;
 
+export const SubscriptionInfoContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  grid-gap: 16px;
+  margin-bottom: 16px;
+`;
+
 export const SubscriptionEventInfo = styled.section`
   min-width: 12em;
 `;
@@ -46,7 +55,7 @@ const TICKET_BG_COLOR = '#fff5c8';
 const TICKET_COLOR = 'inherit';
 const getRandomPosX = () => Math.floor(Math.random() * 100);
 
-const ticketStyles = () => css`
+export const SubscriptionPaymentInfo = styled.section`
   background-color: ${TICKET_BG_COLOR};
   padding: 16px;
   position: relative;
@@ -72,14 +81,4 @@ const ticketStyles = () => css`
     background-image: linear-gradient(135deg, ${TICKET_BG_COLOR} 33%, gray 34%, transparent 44%),
                       linear-gradient(45deg, transparent 66%, ${TICKET_BG_COLOR} 67%);    
   }
-`;
-
-export const SubscriptionPaymentInfo = styled.section`
-  ${ticketStyles}
-  font-size: 12px;
-`;
-
-export const SubscriptionControlsSection = styled.section`
-  margin: 16px 0;
-  ${ticketStyles}
 `;
