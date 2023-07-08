@@ -1,5 +1,5 @@
-import { useId } from "react";
-import { FormFieldWrapper, Input, Label } from "./form-styled-components";
+import { useId } from 'react';
+import { FormFieldWrapper, Input, Label } from './form-styled-components';
 
 type FormFieldProps = {
   label: string;
@@ -10,7 +10,7 @@ type FormFieldProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const FormField: React.FC<FormFieldProps> = ({ label, type, name, value, disabled, onChange }) => {
+const FormField = ({ label, type, name, value, disabled, onChange }: FormFieldProps) => {
   const fieldId = useId();
 
   return (

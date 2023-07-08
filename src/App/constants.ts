@@ -1,2 +1,2 @@
 
-export const TITLE_FONT = "'Righteous', cursive";
+export const TITLE_FONT = '\'Righteous\', cursive';

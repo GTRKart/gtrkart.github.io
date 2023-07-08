@@ -1,5 +1,5 @@
-import { css, styled } from "styled-components";
-import { SubscriptionContainerProps } from "../../SubscriptionForm/SubscriptionForm.styles";
+import { css, styled } from 'styled-components';
+import { SubscriptionContainerProps } from '../../SubscriptionForm/SubscriptionForm.styles';
 import POSTER_MOBILE from '../../media/kart-dark-poster-mobile.jpg';
 import POSTER from '../../media/kart-dark-poster.jpg';
 

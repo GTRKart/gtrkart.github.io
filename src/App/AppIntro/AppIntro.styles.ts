@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
-import { TITLE_FONT } from "../constants";
+import { styled } from 'styled-components';
+import { TITLE_FONT } from '../constants';
 
 export const AppIntroContainer = styled.section`
   padding: 32px;

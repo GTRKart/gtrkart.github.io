@@ -1,4 +1,4 @@
-import { AppHeaderContainer } from "./AppHeader.styles"
+import { AppHeaderContainer } from './AppHeader.styles';
 
 const AppHeader = () => (
   <AppHeaderContainer>

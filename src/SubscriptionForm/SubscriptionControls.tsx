@@ -1,7 +1,7 @@
-import { useState } from "react";
-import FormField from "../components/FormField/FormField";
-import Icon from "../components/Icon";
-import { Button, Row } from "../components/style-components";
+import { useState } from 'react';
+import FormField from '../components/FormField/FormField';
+import Icon from '../components/Icon';
+import { Button, Row } from '../components/style-components';
 
 type User = {
   name: string;

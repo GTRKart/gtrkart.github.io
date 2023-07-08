@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import Icon from "../components/Icon";
-import { Button, FlexItem, Row } from "../components/style-components";
-import GlobalContext from "../context/GlobalContext";
-import { SubscriptionContainer, SubscriptionTitle } from "./SubscriptionForm.styles";
-import SubscriptionInfo from "./SubscriptionFormInfo";
+import { useContext } from 'react';
+import Icon from '../components/Icon';
+import { Button, FlexItem, Row } from '../components/style-components';
+import GlobalContext from '../context/GlobalContext';
+import { SubscriptionContainer, SubscriptionTitle } from './SubscriptionForm.styles';
+import SubscriptionInfo from './SubscriptionFormInfo';
 
 const SubscriptionForm = () => {
   const { isFormOpen, closeForm } = useContext(GlobalContext);
@@ -26,6 +26,6 @@ const SubscriptionForm = () => {
         <SubscriptionInfo />
       </SubscriptionContainer>
   );
-}
+};
 
 export default SubscriptionForm;

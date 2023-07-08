@@ -1,5 +1,5 @@
-import { css, styled } from "styled-components";
-import { TITLE_FONT } from "../App/constants";
+import { css, styled } from 'styled-components';
+import { TITLE_FONT } from '../App/constants';
 
 export type SubscriptionContainerProps = {
   $isFormOpen: boolean;

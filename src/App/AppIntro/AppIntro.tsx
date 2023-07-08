@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import Icon from "../../components/Icon";
-import { Button } from "../../components/style-components";
-import GlobalContext from "../../context/GlobalContext";
-import { AppIntroContainer, AppIntroTitle } from "./AppIntro.styles";
+import { useContext } from 'react';
+import Icon from '../../components/Icon';
+import { Button } from '../../components/style-components';
+import GlobalContext from '../../context/GlobalContext';
+import { AppIntroContainer, AppIntroTitle } from './AppIntro.styles';
 
 const AppIntro = () => {
   const { openForm } = useContext(GlobalContext);
@@ -20,6 +20,6 @@ const AppIntro = () => {
       </p>
     </AppIntroContainer>
   );
-}
+};
 
 export default AppIntro;

@@ -1,6 +1,6 @@
-import Icon from "../components/Icon";
-import SubscriptionControls from "./SubscriptionControls";
-import { SubscriptionEventInfo, SubscriptionInfoContainer, SubscriptionPaymentInfo } from "./SubscriptionForm.styles";
+import Icon from '../components/Icon';
+import SubscriptionControls from './SubscriptionControls';
+import { SubscriptionEventInfo, SubscriptionInfoContainer, SubscriptionPaymentInfo } from './SubscriptionForm.styles';
 
 const SubscriptionInfo = () => {
   return (
@@ -29,6 +29,6 @@ const SubscriptionInfo = () => {
       </SubscriptionPaymentInfo>
     </SubscriptionInfoContainer>
   );
-}
+};
 
 export default SubscriptionInfo;

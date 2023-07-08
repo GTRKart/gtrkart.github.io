@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 type IconLibrary = {
   [key: string]: JSX.Element;
@@ -65,7 +65,7 @@ const SVGIconContainer = styled.span<Pick<IconProps, 'size'>>`
   }
 `;
 
-const Icon = ({ name, size = "0.85em", ...props }: IconProps) => {
+const Icon = ({ name, size = '0.85em', ...props }: IconProps) => {
   return (
     <SVGIconContainer size={size} {...props}>
       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -73,6 +73,6 @@ const Icon = ({ name, size = "0.85em", ...props }: IconProps) => {
       </svg>
     </SVGIconContainer>
   );
-}
+};
 
 export default Icon;
