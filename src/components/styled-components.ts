@@ -20,6 +20,18 @@ export const FlexItem = styled.span<{ flex?: string }>`
   flex: ${({ flex }) => flex || '1'};
 `;
 
+export const WarningMessageWrapper = styled.div`
+  padding: 0 8px;
+  background-color: #fff5c8;
+  border-radius: 4px;
+  border: 1px solid #f5e;
+  color: #40180a;
+`;
+
+export const ErrorMessage = styled.span`
+  color: #d92211;
+`;
+
 export const Button = styled.button<{ $unstyled?: boolean }>`
   display: inline-flex;
   align-items: center;
@@ -33,7 +45,9 @@ export const Button = styled.button<{ $unstyled?: boolean }>`
     background-color: ${$unstyled ? 'transparent' : '#fff'};
     border: ${$unstyled ? '0 none' : '1px solid #000'};
     border-radius: 4px;
-    box-shadow: ${$unstyled ? '0 0 transparent' : '0 2px 4px rgba(0, 0, 0, 0.2)'};
+    box-shadow: ${$unstyled
+      ? '0 0 transparent'
+      : '0 2px 4px rgba(0, 0, 0, 0.2)'};
     color: ${$unstyled ? '#c43cff' : '#000'};
     cursor: pointer;
     font-weight: ${$unstyled ? 'normal' : '700'};
@@ -41,7 +55,9 @@ export const Button = styled.button<{ $unstyled?: boolean }>`
     &:hover {
       background-color: ${$unstyled ? 'transparent' : '#c43cff'};
       border-color: ${$unstyled ? 'transparent' : '#c43cff'};
-      box-shadow: ${$unstyled ? '0 0 transparent' : '0 2px 6px rgba(0, 0, 0, 0.5)'};
+      box-shadow: ${$unstyled
+        ? '0 0 transparent'
+        : '0 2px 6px rgba(0, 0, 0, 0.5)'};
       color: ${$unstyled ? 'inherit' : '#fff'};
     }
   `}
