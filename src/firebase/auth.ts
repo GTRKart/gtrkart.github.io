@@ -17,13 +17,21 @@ type SignInFormData = {
   password: string;
 };
 
+type UserPermissions = {
+  admin?: boolean;
+};
+
 type UserProfile = {
   cpf?: string;
 };
 
 type UserData = Pick<User, 'displayName'> & UserProfile;
 
-const defaultUserProfile: Pick<UserProfile, 'cpf'> = {
+const defaultUserPermissions: UserPermissions = {
+  admin: false,
+};
+
+const defaultUserProfile: UserProfile = {
   cpf: undefined,
 };
 
@@ -53,6 +61,7 @@ const getErrorMessage = (error: { code: string; message: string } | null) => {
   return authErrorMessage[error.code] || error.message;
 };
 
+const userPermissionsRef = (uid: string) => doc(db, 'userPermissions', uid);
 const userProfileRef = (uid: string) => doc(db, 'userProfiles', uid);
 
 const getUserProfile = async (user: User | null) => {
@@ -65,8 +74,20 @@ const getUserProfile = async (user: User | null) => {
   return docData ?? defaultUserProfile;
 };
 
+const getUserPermissions = async (user: User | null) => {
+  if (!user) {
+    return defaultUserPermissions;
+  }
+
+  const docResponse = await getDoc(userPermissionsRef(user.uid));
+  const docData = docResponse.data();
+  return docData ?? defaultUserPermissions;
+};
+
 const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [userPermissions, setUserPermissions] =
+    useState<UserPermissions | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [error, setError] = useState<unknown>(null);
 
@@ -136,11 +157,25 @@ const useAuth = () => {
 
       if (!user) {
         setUserProfile(null);
+        setUserPermissions(null);
         return;
       }
 
-      const userProfile = await getUserProfile(user);
-      setUserProfile(userProfile);
+      try {
+        const userProfile = await getUserProfile(user);
+        setUserProfile(userProfile);
+      } catch (error) {
+        setError(error);
+        setUserProfile(defaultUserProfile);
+      }
+
+      try {
+        const userPermissions = await getUserPermissions(user);
+        setUserPermissions(userPermissions);
+      } catch (error) {
+        console.error(error);
+        setUserPermissions(defaultUserPermissions);
+      }
     });
 
     return unsubscribe;
@@ -149,6 +184,7 @@ const useAuth = () => {
   return {
     user,
     userProfile,
+    userPermissions,
     error,
     signInOrCreateUser,
     updateUserData,

@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import Icon from '../components/Icon';
 import { Button, FlexItem, Row } from '../components/styled-components';
 import GlobalContext from '../context/GlobalContext';
+import { useAuth } from '../firebase/auth';
 
 const SubscriptionNavBar = () => {
   const { closeForm } = useContext(GlobalContext);
+  const { userPermissions } = useAuth();
 
   return (
     <>
@@ -15,6 +17,11 @@ const SubscriptionNavBar = () => {
         <FlexItem>
           <p>Próxima corrida</p>
         </FlexItem>
+        {userPermissions?.admin && (
+          <Button type="button" $unstyled>
+            <Icon name="edit" /> Editar
+          </Button>
+        )}
       </Row>
 
       <hr />
