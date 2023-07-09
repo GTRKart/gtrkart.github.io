@@ -4,27 +4,25 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:@typescript-eslint/recommended",
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
   ],
   settings: {
     react: {
-      version: "detect",
+      version: 'detect',
     },
   },
   overrides: [],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "@typescript-eslint"],
-  ignorePatterns: [".eslintrc.js", "node_modules/", "build/", "coverage/"],
+  plugins: ['react', '@typescript-eslint'],
+  ignorePatterns: ['.eslintrc.js', 'node_modules/', 'build/', 'coverage/'],
   rules: {
-    semi: ["error", "always"],
-    quotes: ["error", "single"],
-    "@typescript-eslint/no-empty-function": "off",
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };
