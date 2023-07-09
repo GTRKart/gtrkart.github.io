@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app';
 import { SignInFormData, getErrorMessage, useAuth } from '../../firebase/auth';
 import { useFormData } from '../../hooks/useFormData';
 import FormField from '../FormField/FormField';
@@ -30,9 +31,9 @@ const LoginForm = ({ children }: { children?: React.ReactNode }) => {
     <form action="post" onSubmitCapture={handleSubmit}>
       <p>Faça login ou cadastre-se para fazer a sua inscrição.</p>
 
-      {error && (
+      {!!error && (
         <p>
-          <ErrorMessage>{getErrorMessage(error)}</ErrorMessage>
+          <ErrorMessage>{getErrorMessage(error as FirebaseError)}</ErrorMessage>
         </p>
       )}
 

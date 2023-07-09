@@ -8,12 +8,23 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { auth } from './config';
+import { auth, db } from './config';
 
 type SignInFormData = {
   email: string;
   password: string;
+};
+
+type UserProfile = {
+  cpf?: string;
+};
+
+type UserData = Pick<User, 'displayName'> & UserProfile;
+
+const defaultUserProfile: Pick<UserProfile, 'cpf'> = {
+  cpf: undefined,
 };
 
 const authErrorCode = {
@@ -34,17 +45,30 @@ const authErrorMessage = {
   [authErrorCode.WRONG_PASSWORD]: 'Senha incorreta.',
 };
 
-const getErrorMessage = (error: FirebaseError | null) => {
-  if (!error) {
+const getErrorMessage = (error: { code: string; message: string } | null) => {
+  if (!error?.code || !error?.message) {
     return null;
   }
 
   return authErrorMessage[error.code] || error.message;
 };
 
+const userProfileRef = (uid: string) => doc(db, 'userProfiles', uid);
+
+const getUserProfile = async (user: User | null) => {
+  if (!user) {
+    return defaultUserProfile;
+  }
+
+  const docResponse = await getDoc(userProfileRef(user.uid));
+  const docData = docResponse.data();
+  return docData ?? defaultUserProfile;
+};
+
 const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState<FirebaseError | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [error, setError] = useState<unknown>(null);
 
   const signIn = async ({ email, password }: SignInFormData) => {
     return await signInWithEmailAndPassword(auth, email, password);
@@ -52,34 +76,26 @@ const useAuth = () => {
 
   const createUser = async ({ email, password }: SignInFormData) => {
     try {
+      setError(null);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
       sendEmailVerification(userCredential.user);
-      setError(null);
       return userCredential;
     } catch (error) {
-      if (!(error instanceof FirebaseError)) {
-        throw error;
-      }
-
       setError(error);
     }
   };
 
   const signInOrCreateUser = async ({ email, password }: SignInFormData) => {
     try {
-      const userCredential = await signIn({ email, password });
       setError(null);
+      const userCredential = await signIn({ email, password });
       return userCredential;
     } catch (error) {
-      if (!(error instanceof FirebaseError)) {
-        throw error;
-      }
-
-      if (error.code === authErrorCode.USER_NOT_FOUND) {
+      if ((error as FirebaseError)?.code === authErrorCode.USER_NOT_FOUND) {
         return await createUser({ email, password });
       } else {
         setError(error);
@@ -87,24 +103,16 @@ const useAuth = () => {
     }
   };
 
-  const updateUserData = async ({
-    displayName,
-    photoURL,
-    ...userData
-  }: Partial<User>) => {
+  const updateUserData = async ({ displayName, ...userData }: UserData) => {
     if (!user) {
       return;
     }
 
     try {
-      await updateProfile(user, { displayName, photoURL });
-      // TODO: save user data to firestore
       setError(null);
+      await updateProfile(user, { displayName });
+      await setDoc(userProfileRef(user.uid), userData);
     } catch (error) {
-      if (!(error instanceof FirebaseError)) {
-        throw error;
-      }
-
       setError(error);
     }
   };
@@ -123,8 +131,16 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+
+      if (!user) {
+        setUserProfile(null);
+        return;
+      }
+
+      const userProfile = await getUserProfile(user);
+      setUserProfile(userProfile);
     });
 
     return unsubscribe;
@@ -132,6 +148,7 @@ const useAuth = () => {
 
   return {
     user,
+    userProfile,
     error,
     signInOrCreateUser,
     updateUserData,
@@ -139,6 +156,6 @@ const useAuth = () => {
   };
 };
 
-export type { SignInFormData };
+export type { SignInFormData, UserData };
 
 export { authErrorCode, getErrorMessage, useAuth };
