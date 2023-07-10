@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import GlobalContext from '../context/GlobalContext';
+import GlobalContext, {
+  globalContextInitialState,
+} from '../context/GlobalContext';
 import App from './App';
 
 test('renders app header', () => {
@@ -15,19 +17,20 @@ test('renders action button', () => {
 });
 
 test('click cta calls openForm', () => {
-  const isFormOpen = false;
   const openForm = jest.fn();
   const closeForm = jest.fn();
 
   render(
-    <GlobalContext.Provider value={{ isFormOpen, openForm, closeForm }}>
+    <GlobalContext.Provider
+      value={{ ...globalContextInitialState, openForm, closeForm }}
+    >
       <App />
     </GlobalContext.Provider>
   );
 
   const buttonElement = screen.getByText(/Inscreva-se/i);
   buttonElement.click();
-  
+
   expect(openForm).toHaveBeenCalled();
 
   const closeButtonElement = screen.getByText(/Voltar/i);

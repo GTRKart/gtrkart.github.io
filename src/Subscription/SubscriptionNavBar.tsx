@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import Icon from '../components/Icon';
+import { RaceEventForm } from '../components/RaceEventForm/RaceEventForm';
 import { Button, FlexItem, Row } from '../components/styled-components';
 import GlobalContext from '../context/GlobalContext';
 import { useAuth } from '../firebase/auth';
 
 const SubscriptionNavBar = () => {
-  const { closeForm } = useContext(GlobalContext);
+  const { closeForm, openDrawer } = useContext(GlobalContext);
   const { userPermissions } = useAuth();
 
   return (
@@ -18,7 +19,11 @@ const SubscriptionNavBar = () => {
           <p>Próxima corrida</p>
         </FlexItem>
         {userPermissions?.admin && (
-          <Button type="button" $unstyled>
+          <Button
+            type="button"
+            $unstyled
+            onClick={() => openDrawer('Editar corrida', <RaceEventForm />)}
+          >
             <Icon name="edit" /> Editar
           </Button>
         )}
