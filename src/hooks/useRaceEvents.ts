@@ -1,4 +1,5 @@
 import {
+  QueryConstraint,
   Timestamp,
   collection,
   getDocs,
@@ -32,7 +33,7 @@ type RaceEvent = {
   subscriptions: Subscription[];
 };
 
-const useCollection = <T>(path: string, ...params: any[]) => {
+const useCollection = <T>(path: string, ...params: QueryConstraint[]) => {
   const [collectionData, setCollectionData] = useState<Partial<T>[]>([]);
 
   const raceEventsQuery = query(collection(db, path), ...params);
